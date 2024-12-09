@@ -1,0 +1,18 @@
+asm_file := "day1.asm"
+obj_file := "day1.o"
+exec_file := "day1"
+input_file := "input1.txt"
+
+build:
+    nasm -f elf64 -g -F dwarf {{asm_file}} && gcc -no-pie {{obj_file}} -o {{exec_file}}
+
+run:
+    just build
+    ./{{exec_file}} < {{input_file}}
+
+clean:
+    rm -f {{obj_file}} {{exec_file}}
+
+debug:
+    just build
+    gdb ./{{exec_file}}
